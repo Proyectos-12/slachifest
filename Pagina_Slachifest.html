@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SalchiFest Neiva 2026</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background: linear-gradient(
+        135deg,
+        #C084FC 0%,
+        #8B5CF6 25%,
+        #6366F1 50%,
+        #312E81 75%,
+        #0F172A 100%
+    );
+
+    min-height:100vh;
+    padding:20px;
+    background-attachment:fixed;
+}
+
+h1{
+    text-align:center;
+    color:white;
+    margin-bottom:25px;
+    font-size:2.4rem;
+    text-shadow:0 0 15px rgba(255,255,255,.25);
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+}
+
+.card{
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+
+    padding:18px;
+    margin-bottom:18px;
+
+    border-radius:18px;
+
+    border-left:6px solid #8B5CF6;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.15);
+
+    transition:all .35s ease;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+}
+
+.card h2{
+    color:#6C3BFF;
+    margin-bottom:10px;
+}
+
+details{
+    margin-top:12px;
+}
+
+details summary{
+    cursor:pointer;
+    color:#5B2CE6;
+    font-weight:bold;
+}
+
+details summary:hover{
+    color:#8B5CF6;
+}
+
+ul{
+    margin-top:10px;
+    padding-left:22px;
+}
+
+ul li{
+    margin-bottom:5px;
+}
+
+.btn{
+    padding:10px 15px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    margin-top:10px;
+    color:white;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.maps{
+    background:#8E44AD;
+}
+
+.maps:hover{
+    background:#7D3C98;
+    transform:scale(1.03);
+}
+
+.selectBtn{
+    background:#6C3BFF;
+}
+
+.selectBtn:hover{
+    background:#5B2CE6;
+    transform:scale(1.03);
+}
+
+.cart{
+    position:sticky;
+    bottom:10px;
+
+    background:rgba(255,255,255,.96);
+
+    border-radius:18px;
+    padding:20px;
+
+    margin-top:25px;
+
+    border-top:5px solid #8B5CF6;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.15);
+}
+
+.cart h3{
+    margin-bottom:10px;
+    color:#6C3BFF;
+}
+
+#cartList{
+    margin-left:20px;
+}
+
+#cartList li{
+    margin-bottom:5px;
+}
+
+select,
+input{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+
+    border:1px solid #D7CCFF;
+    border-radius:10px;
+}
+
+input:focus{
+    outline:none;
+    border-color:#8B5CF6;
+    box-shadow:0 0 8px rgba(139,92,246,.4);
+}
+
+#finish{
+    width:100%;
+    margin-top:15px;
+    background:#7C4DFF;
+}
+
+#finish:hover{
+    background:#673AB7;
+}
+
+.message{
+    text-align:center;
+    margin-top:15px;
+
+    color:#6C3BFF;
+
+    font-size:22px;
+    font-weight:bold;
+}
+
+/* TARJETA SELECCIONADA */
+
+.selected{
+
+    border:3px solid #C084FC;
+
+    background:linear-gradient(
+        135deg,
+        rgba(243,232,255,.75),
+        rgba(237,233,254,.75)
+    );
+
+    opacity:.82;
+
+    transform:
+        translateY(-8px)
+        scale(1.03);
+
+    box-shadow:
+
+        0 0 20px rgba(192,132,252,.95),
+
+        0 0 45px rgba(168,85,247,.85),
+
+        0 0 80px rgba(139,92,246,.75),
+
+        0 0 120px rgba(99,102,241,.55),
+
+        0 15px 35px rgba(0,0,0,.25);
+
+    animation:pulseCard 1.6s infinite;
+
+    backdrop-filter:blur(6px);
+
+    position:relative;
+}
+
+/* CHECK DE SELECCIONADO */
+
+.selected::after{
+
+    content:"✅";
+
+    position:absolute;
+
+    top:12px;
+    right:12px;
+
+    font-size:32px;
+
+    filter:drop-shadow(0 0 12px #ffffff);
+
+    animation:pop .4s ease;
+}
+
+
+/* ANIMACION DEL CHECK */
+
+@keyframes pop{
+
+    from{
+        transform:scale(0);
+    }
+
+    to{
+        transform:scale(1);
+    }
+
+}
+
+/* ANIMACION DE BRILLO */
+
+@keyframes pulseCard{
+
+    0%{
+
+        box-shadow:
+        0 0 20px rgba(192,132,252,.8),
+        0 0 50px rgba(168,85,247,.7),
+        0 0 90px rgba(139,92,246,.6),
+        0 0 130px rgba(99,102,241,.4);
+
+    }
+
+    50%{
+
+        box-shadow:
+        0 0 35px rgba(192,132,252,1),
+        0 0 70px rgba(168,85,247,.9),
+        0 0 120px rgba(139,92,246,.8),
+        0 0 180px rgba(99,102,241,.6);
+
+    }
+
+    100%{
+
+        box-shadow:
+        0 0 20px rgba(192,132,252,.8),
+        0 0 50px rgba(168,85,247,.7),
+        0 0 90px rgba(139,92,246,.6),
+        0 0 130px rgba(99,102,241,.4);
+
+    }
+
+}
+
+a{
+    text-decoration:none;
+}
+
+@media (max-width:768px){
+
+    body{
+        padding:12px;
+    }
+
+    h1{
+        font-size:1.9rem;
+    }
+
+    .card{
+        padding:15px;
+    }
+
+}
+
+.ticketModal{
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,.75);
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:9999;
+}
+
+.ticket{
+
+    width:420px;
+    max-width:90%;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    box-shadow:
+    0 0 20px rgba(168,85,247,.8),
+    0 0 50px rgba(168,85,247,.5);
+
+    animation:ticketPop .4s ease;
+}
+
+.ticket h2{
+    color:#6C3BFF;
+}
+
+.ticket h3{
+    color:#8B5CF6;
+}
+
+.ticket ul{
+    list-style:none;
+    padding:0;
+}
+
+.ticket ul li{
+
+    background:#F3E8FF;
+
+    margin:8px 0;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+}
+
+.ticketMensaje{
+
+    color:#6C3BFF;
+
+    font-size:18px;
+
+    font-weight:bold;
+}
+
+#cerrarTicket{
+
+    width:100%;
+
+    background:#7C4DFF;
+
+    margin-top:15px;
+}
+
+#cerrarTicket:hover{
+
+    background:#673AB7;
+}
+
+@keyframes ticketPop{
+
+    from{
+        transform:scale(.6);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>🌭 SalchiFest Neiva 2026</h1>
+
+<div id="participants"></div>
+
+<div class="cart">
+    <h3>🛒 Tus Selecciones</h3>
+
+    <ul id="cartList"></ul>
+
+    <label><strong>Hora de llegada:</strong></label>
+    <input type="time" id="hora">
+
+    <button id="finish" class="btn">
+        Confirmar elección
+    </button>
+
+    <div id="mensaje" class="message"></div>
+</div>
+
+</div>
+
+<script>
+
+const participantes = [
+
+{
+nombre:"Pa' Komer",
+direccion:"Cra. 26 #46-56, sector Granjas, Neiva",
+ingredientes:[
+"Lechuga",
+"Salsa de Ajo",
+"Papa a la francesa",
+"Mix de Carnes",
+"Queso costeño",
+"Maíz tierno con tocineta",
+"Salchicha Ranchera",
+"2 salsas de la casa"
+]
+},
+
+{
+nombre:"La Salchipaperia",
+direccion:"Cra. 1 #30-36, Neiva, Huila",
+ingredientes:[
+"Papa criolla",
+"Salchicha",
+"Lonchas de queso",
+"Panceta de cerdo ahumada",
+"Carne desmechada",
+"Guacamole",
+"Madurito",
+"Salsa de la casa"
+]
+},
+
+{
+nombre:"SalchiBoom",
+direccion:"Av. Tenerife #8-35, Neiva",
+ingredientes:[
+"Papa francesa y criolla",
+"Salchicha",
+"Lechuga",
+"Pernil de pollo",
+"Carne de hamburguesa",
+"Butifarra",
+"Patacón maduro",
+"Salsa de la casa",
+"Asado huilense",
+"Queso rayado",
+"Beacon en almíbar de frutos huilenses"
+]
+},
+
+{
+nombre:"Herederos Food",
+direccion:"Av. Tenerife #8-05 Primer Piso",
+ingredientes:[
+"Papa francesa y criolla",
+"Salsas",
+"Nachos de queso",
+"Salchicha",
+"Maduro melado",
+"Carne BBQ",
+"Chicharrón",
+"Guacamole",
+"Cuajada rayada",
+"Cebolla crispí",
+"Chips de plátano"
+]
+},
+
+{
+nombre:"Lyon El Perro Frances",
+direccion:"Cra. 14 #23-08, Neiva",
+ingredientes:[
+"Papas francesas",
+"Queso cheddar",
+"Salsa de la casa",
+"Carne desmechada",
+"Plátano maduro",
+"Salchicha",
+"Queso gratinado",
+"Tocineta",
+"Chorizo"
+]
+},
+
+{
+nombre:"Pinches Pinchos",
+direccion:"Av. 26 #33-46, Neiva",
+ingredientes:[
+"Salsa de la casa",
+"Papas francesa y criolla",
+"Platanitos",
+"Pop corn de pollo",
+"Maíz tierno",
+"Pull pork",
+"Guacamole",
+"Salchicha",
+"Chicharrón",
+"2 lonchas de queso"
+]
+},
+
+{
+nombre:"Adictos Kitchen",
+direccion:"Cl. 6 #14A-10, Neiva",
+ingredientes:[
+"Papas francesas",
+"Salsas de la casa",
+"Salchicha",
+"Queso fundido",
+"Chips de plátano",
+"Carne molida",
+"Pico de gallo"
+]
+},
+
+{
+nombre:"A lo Callejero",
+direccion:"Cerca del Jardín, Neiva",
+ingredientes:[
+"Papas francesa y criolla",
+"Salsa de la casa",
+"Lechuga",
+"Queso",
+"Salchicha",
+"Costilla ahumada",
+"Carne desmechada",
+"Queso rallado"
+]
+},
+
+{
+nombre:"Queen Papa",
+direccion:"Calle 20, Av. Buganviles #34A-05, Neiva",
+ingredientes:[
+"Papa criolla",
+"Salsa de la casa",
+"Salchicha",
+"Queso fundido",
+"Platanitos",
+"Carne desmechada",
+"Croquetas de queso",
+"Guacamole",
+"Salsa de maracuyá"
+]
+},
+
+{
+nombre:"Burger Distrit",
+direccion:"Cl. 25A #34bis-73, Neiva",
+ingredientes:[
+"Papa francesa y criolla",
+"Salsa de la casa",
+"Salchicha",
+"Queso doble crema",
+"Plátano maduro",
+"Pollo desmechado",
+"Maicitos",
+"Carne desmechada"
+]
+}
+
+];
+
+
+const contenedor = document.getElementById("participants");
+const carrito = [];
+
+participantes.forEach((p,index)=>{
+
+const card = document.createElement("div");
+card.className="card";
+
+card.innerHTML=`
+<h2>${p.nombre}</h2>
+
+<details>
+<summary><strong>🍟 Ver ingredientes</strong></summary>
+<ul>
+${p.ingredientes.map(i=>`<li>${i}</li>`).join("")}
+</ul>
+</details>
+
+<details>
+    <summary><strong>📍 Ver dirección</strong></summary>
+
+    <p style="margin-top:10px;">
+        ${p.direccion}
+    </p>
+
+    <a
+       href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.nombre + ' ' + p.direccion)}"
+       target="_blank">
+
+        <button type="button" class="btn maps">
+            📍 Ver ubicación en Google Maps
+        </button>
+    </a>
+
+</details>
+<button class="btn selectBtn">
+Seleccionar
+</button>
+`;
+
+const boton = card.querySelector(".selectBtn");
+
+boton.addEventListener("click",()=>{
+
+const existe = carrito.find(x=>x.nombre===p.nombre);
+
+if(existe){
+    const pos = carrito.indexOf(existe);
+    carrito.splice(pos,1);
+    card.classList.remove("selected");
+}else{
+
+    if(carrito.length >= 2){
+        alert("Solo puedes seleccionar 2 participantes.");
+        return;
+    }
+
+    carrito.push(p);
+    card.classList.add("selected");
+}
+
+actualizarCarrito();
+});
+
+contenedor.appendChild(card);
+
+});
+
+function actualizarCarrito(){
+
+const lista = document.getElementById("cartList");
+lista.innerHTML="";
+
+carrito.forEach(item=>{
+    lista.innerHTML += `<li>${item.nombre}</li>`;
+});
+}
+
+document.getElementById("finish").addEventListener("click",()=>{
+
+    const hora = document.getElementById("hora").value;
+
+    if(carrito.length !== 2){
+
+        alert("Debes seleccionar exactamente 2 participantes.");
+        return;
+
+    }
+
+    if(!hora){
+
+        alert("Selecciona una hora.");
+        return;
+
+    }
+
+    const mensaje = `🌭 SALCHIFEST NEIVA
+
+📅 Fecha: 03/10/2026
+⏰ Hora: ${hora}
+
+🍟 Lugares seleccionados:
+
+1. ${carrito[0].nombre}
+2. ${carrito[1].nombre}
+
+✅ Nos vemos pronto`;
+
+    const numero = "573028601964";
+
+    const url =
+    `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+
+    window.open(url, "_blank");
+
+document.getElementById("enviarWhatsapp").onclick = () => {
+
+    const mensaje = `🌭 SALCHIFEST NEIVA
+
+📅 Fecha: 03/10/2026
+⏰ Hora: ${hora}
+
+🍟 Lugares seleccionados:
+
+1. ${carrito[0].nombre}
+2. ${carrito[1].nombre}
+
+✅ Nos vemos pronto`;
+
+    const numero = "573XXXXXXXXX";
+
+    window.open(
+        `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`,
+        "_blank"
+    );
+};
+});
+
+``
+
+</script>
+<div id="ticketModal" class="ticketModal">
+
+    <div class="ticket">
+
+        <h2>🌭 SalchiFest Neiva</h2>
+
+        <hr><br>
+
+        <p><strong>Fecha:</strong> 03/10/2026</p>
+
+        <p><strong>Hora:</strong> <span id="ticketHora"></span></p>
+
+        <br>
+
+        <h3>🍟 Lugares seleccionados</h3>
+
+        <ul id="ticketLugares"></ul>
+
+        <br><hr><br>
+
+        <p class="ticketMensaje">
+            ✅ Nos vemos pronto
+        </p>
+
+        <button id="enviarWhatsapp" class="btn">
+            📲 Enviar por WhatsApp
+        </button>
+
+    </div>
+
+</div>
+
+</body>
+</html>
